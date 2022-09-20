@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+   <div class="student">
+           <div class="container">
+				  <div class="row min-height">
+					    <div class="col-sm-12">
+                            <div class="row main_boder">
+                                <div class="col-sm-4">
+                                     <h3 class="appointmnet_list">Resources List</h3>
+                                </div>
+                                <div class="col-sm-5">
+                                      <form class="form-inline my-2 my-lg-0" method="GET" action="">
+                                          <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search by Name" aria-label="Search">
+                                          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">Search</button> 
+                                       </form>
+
+                                </div>
+                                <div class="col-sm-3">
+                                    <a class="btn btn-xm btn-success float-right" href="{% url 'resource_new' %}"><i class="fa fa-plus"></i> New</a>
+                                </div>
+                            </div>
+                             <table class="table table-hover table-bordered">
+                                 <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Resource Name</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Availability</th>
+                                   <th scope="col">Action</th>  
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {% for resource in resources %}
+                                  <tr>
+                                    <td> <a href="{% url 'resource_detail' resource.pk%}">{{ resource.resource_name}}</a></td>
+                                    <td>{{resource.location}}</td>
+                                    <td>{{resource.category}}</td>
+                                    <td>
+                                      {% if resource.availability is True %}
+                                      <span class="badge badge-pill badge-success">
+                                      Available</span>
+                                      {% else %}
+                                      <span class="badge badge-pill badge-danger">
+                                      Not Available</span>                                       
+                                      {% endif %}    
+                                    </td>
+                                    <td>
+                                      <a class="btn btn-xm btn-secondary" href="{% url 'resource_edit' resource.pk%}"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                                      <a class="btn btn-xm btn-danger" href="{% url 'resource_delete' resource.pk%}"><i class="fa fa-trash"></i> Delete</a>
+                                    </td>
+                                  </tr>
+                                  {% endfor %}
+                                </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+	                                 
+{% endblock content%}
+
+
+

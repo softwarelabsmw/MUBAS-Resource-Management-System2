@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>Edit Resource
+        <a  class="btn btn-danger btn-xm float-right" href="{{request.META.HTTP_REFERER}}"><i class="fa fa-times"></i> Cancel </a>
+    </h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy}}
+        <button type="submit" class="btn btn-primary btn-lg">Update Record</button>   
+    </form>
+{% endblock %}

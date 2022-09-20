@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>New Booking
+        <a  class="btn btn-danger btn-xm float-right" href="{{request.META.HTTP_REFERER}}"><i class="fa fa-times"></i> Cancel </a> 
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy}}
+        <button type="submit" class="btn btn-primary btn-lg">Submit Request</button>   
+    </form>
+{% endblock %}
+
+{% block morejs %}
+<script>
+//Resource Searchable Select Script
+$(function () {
+  $("#id_resource").select2(
+  {placeholder: 'Select resource', theme: "classic"});
+});
+</script>
+{% endblock morejs %}
